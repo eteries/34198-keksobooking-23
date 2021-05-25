@@ -1,7 +1,7 @@
 # Личный проект «Кексобукинг»
 
-* Студент: [eteries](https://up.htmlacademy.ru/javascript/23/user/34198).
-* Наставник: `Неизвестно`.
+* Студент: [Сергей Яньшин](https://up.htmlacademy.ru/javascript/23/user/34198).
+* Наставник: [Максим Кузнецов](https://htmlacademy.ru/profile/knenkne).
 
 ---
 
