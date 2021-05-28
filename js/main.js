@@ -11,7 +11,7 @@ function validateRange (from, to) {
 function getRandomInt (from, to) {
   validateRange(from, to);
 
-  return Math.round(from + Math.random() * (to - from) );
+  return Math.round(from + Math.random() * (to - from));
 }
 
 function getRandomFloat (from, to, digits) {
