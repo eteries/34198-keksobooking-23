@@ -1,3 +1,1 @@
-import { getOffers } from './data.js';
-
-getOffers();
+import './popup.js';

@@ -49,10 +49,26 @@ function getRandomArrayElement (array) {
   return array[getRandomInt(0, array.length - 1)];
 }
 
+function declineNoun (number, case1, case2, case5) {
+  number %= 100;
+  if (number >= 5 && number <= 20) {
+    return case5;
+  }
+  number %= 10;
+  if (number === 1) {
+    return case1;
+  }
+  if (number >= 2 && number <= 4) {
+    return case2;
+  }
+  return case5;
+}
+
 export {
   getRandomInt,
   getRandomFloat,
   getUniqueRandomInt,
   getRandomArrayElement,
-  getRandomSubArray
+  getRandomSubArray,
+  declineNoun
 };

@@ -26,8 +26,8 @@ const AVATAR_INDEXES = {
 };
 
 const PRICES = {
-  MIN: 50,
-  MAX: 1000,
+  MIN: 3000,
+  MAX: 20000,
 };
 
 const ROOMS = {
@@ -116,8 +116,8 @@ const photos = [
 
 const getAvatarIndex = getUniqueRandomInt(AVATAR_INDEXES.MIN, AVATAR_INDEXES.MAX);
 
-function getAvatarNormalizedIndex () {
-  const indexString = getAvatarIndex().toString();
+function getAvatarNormalizedIndex (indexNumber) {
+  const indexString = indexNumber.toString();
 
   return indexString.length === 1 ? `0${indexString}` : indexString;
 }
@@ -128,7 +128,7 @@ function createMockOffer () {
 
   return {
     author: {
-      avatar: `img/avatars/user${getAvatarNormalizedIndex()}.png`,
+      avatar: `img/avatars/user${getAvatarNormalizedIndex(getAvatarIndex())}.png`,
     },
     offer: {
       title: titles.map((group) => getRandomArrayElement(group)).join(' '),
