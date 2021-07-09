@@ -1,5 +1,5 @@
 import './form.js';
 import './popup.js';
-import { activateForm } from './form.js';
+import { toggleForm } from './form.js';
 
-activateForm();
+toggleForm();
