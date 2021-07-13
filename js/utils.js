@@ -64,11 +64,21 @@ function declineNoun (number, case1, case2, case5) {
   return case5;
 }
 
+function syncFormFields (node, arrayFrom, arrayTo, setField) {
+  const selectedIndex = arrayFrom.indexOf(node.value);
+  const newValue = arrayTo[selectedIndex];
+
+  if (typeof setField === 'function') {
+    setField(newValue);
+  }
+}
+
 export {
   getRandomInt,
   getRandomFloat,
   getUniqueRandomInt,
   getRandomArrayElement,
   getRandomSubArray,
-  declineNoun
+  declineNoun,
+  syncFormFields
 };
