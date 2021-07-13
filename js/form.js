@@ -1,7 +1,13 @@
+import { syncFormFields } from './utils.js';
+
 const adForm = document.querySelector('.ad-form');
 const fieldsets = adForm.querySelectorAll('fieldset');
 const filterForm = document.querySelector('.map__filters');
 const filters = filterForm.querySelectorAll('.map__filter, .map__features');
+const checkInSelect = adForm.querySelector('#timein');
+const checkOutSelect = adForm.querySelector('#timeout');
+const typeSelect = adForm.querySelector('#type');
+const priceInput = adForm.querySelector('#price');
 
 function toggleForm () {
   adForm.classList.toggle('ad-form--disabled');
@@ -12,5 +18,24 @@ function toggleForm () {
 }
 
 toggleForm();
+
+checkInSelect.addEventListener('change', () => {
+  syncFormFields(checkInSelect, ['12:00', '13:00', '14:00'], ['12:00', '13:00', '14:00'], (newValue) => {
+    checkOutSelect.value = newValue;
+  });
+});
+
+checkOutSelect.addEventListener('change', () => {
+  syncFormFields(checkOutSelect, ['12:00', '13:00', '14:00'], ['12:00', '13:00', '14:00'], (newValue) => {
+    checkInSelect.value = newValue;
+  });
+});
+
+typeSelect.addEventListener('change', () => {
+  syncFormFields(typeSelect, ['bungalow', 'flat', 'hotel', 'house', 'palace'], ['0', '1000', '3000', '5000', '10000'], (newValue) => {
+    priceInput.min = newValue;
+    priceInput.placeholder = newValue;
+  });
+});
 
 export { toggleForm };
