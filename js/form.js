@@ -8,6 +8,7 @@ const checkInSelect = adForm.querySelector('#timein');
 const checkOutSelect = adForm.querySelector('#timeout');
 const typeSelect = adForm.querySelector('#type');
 const priceInput = adForm.querySelector('#price');
+const addressInput = adForm.querySelector('#address');
 
 function toggleForm () {
   adForm.classList.toggle('ad-form--disabled');
@@ -38,4 +39,9 @@ typeSelect.addEventListener('change', () => {
   });
 });
 
-export { toggleForm };
+function setAddress ({lat, lng}) {
+  addressInput.value = `${lat.toFixed(5)}, ${lng.toFixed(5)}`;
+  addressInput.disabled = true;
+}
+
+export { toggleForm, setAddress };

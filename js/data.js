@@ -114,8 +114,6 @@ const photos = [
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg',
 ];
 
-const getAvatarIndex = getUniqueRandomInt(AVATAR_INDEXES.MIN, AVATAR_INDEXES.MAX);
-
 function getAvatarNormalizedIndex (indexNumber) {
   const indexString = indexNumber.toString();
 
@@ -125,6 +123,7 @@ function getAvatarNormalizedIndex (indexNumber) {
 function createMockOffer () {
   const latitude = getRandomFloat(COORDINATES.LAT.MIN, COORDINATES.LAT.MAX, COORDINATES.PRECISION);
   const longitude = getRandomFloat(COORDINATES.LNG.MIN, COORDINATES.LNG.MAX, COORDINATES.PRECISION);
+  const getAvatarIndex = getUniqueRandomInt(AVATAR_INDEXES.MIN, AVATAR_INDEXES.MAX);
 
   return {
     author: {
