@@ -34,21 +34,30 @@ function createPopup ({offer, author: {avatar}}) {
   placeText(`Заезд после ${offer.checkin}, выезд до ${offer.checkout}`, '.popup__text--time', newPopup);
   placeText(offer.description, '.popup__description', newPopup);
 
-  newPopup.querySelectorAll('.popup__feature')
-    .forEach((element) => {
-      offer.features.every((feature) => !element.classList.contains(`popup__feature--${feature}`))
-        ? element.remove()
-        : null;
-    });
+  const features = newPopup.querySelector('.popup__features');
+  if (offer.features) {
+    features.querySelectorAll('.popup__feature')
+      .forEach((element) => {
+        if (offer.features.every((feature) => !element.classList.contains(`popup__feature--${feature}`))) {
+          element.remove();
+        }
+      });
+  } else {
+    features.remove();
+  }
 
   const photos = newPopup.querySelector('.popup__photos');
   const photoExample = photos.querySelector('.popup__photo');
   photos.removeChild(photoExample);
-  offer.photos.forEach((src) => {
-    const newPhoto = photoExample.cloneNode();
-    newPhoto.src = src;
-    photos.appendChild(newPhoto);
-  });
+  if (offer.photos) {
+    offer.photos.forEach((src) => {
+      const newPhoto = photoExample.cloneNode();
+      newPhoto.src = src;
+      photos.appendChild(newPhoto);
+    });
+  } else {
+    photos.remove();
+  }
 
   newPopup.querySelector('.popup__avatar')
     .src = avatar || DEFAULT_AVATAR_PATH;
@@ -56,7 +65,6 @@ function createPopup ({offer, author: {avatar}}) {
   return newPopup;
 }
 
-const offers = getOffers();
-const popups = offers.map((offer) => createPopup(offer));
-document.querySelector('#map-canvas')
-  .appendChild(popups[0]);
+getOffers();
+
+export { createPopup };
