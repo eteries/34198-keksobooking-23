@@ -1,3 +1,5 @@
+const ALERT_SHOW_TIME = 5000;
+
 function validateRange (from, to) {
   if (from < 0 || to < 0) {
     throw new RangeError('The arguments can\'t be negative');
@@ -73,6 +75,36 @@ function syncFormFields (node, arrayFrom, arrayTo, setField) {
   }
 }
 
+function showAlert (message, bgColor = 'red') {
+  const alertContainer = document.createElement('div');
+  alertContainer.style.zIndex = 100;
+  alertContainer.style.position = 'fixed';
+  alertContainer.style.width = '300px';
+  alertContainer.style.top = '20px';
+  alertContainer.style.right = 0;
+  alertContainer.style.padding = '10px';
+  alertContainer.style.fontSize = '18px';
+  alertContainer.style.textAlign = 'center';
+  alertContainer.style.backgroundColor = bgColor;
+  alertContainer.style.color = 'white';
+
+  alertContainer.textContent = message;
+
+  document.body.append(alertContainer);
+
+  setTimeout(() => {
+    alertContainer.remove();
+  }, ALERT_SHOW_TIME);
+}
+
+function isPalace (roomNumber) {
+  return roomNumber === 100;
+}
+
+function isEscEvent (evt) {
+  return evt.key === 'Escape' || evt.key === 'Esc';
+}
+
 export {
   getRandomInt,
   getRandomFloat,
@@ -80,5 +112,8 @@ export {
   getRandomArrayElement,
   getRandomSubArray,
   declineNoun,
-  syncFormFields
+  syncFormFields,
+  showAlert,
+  isPalace,
+  isEscEvent
 };

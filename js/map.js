@@ -1,11 +1,14 @@
 import { toggleForm, setAddress } from './form.js';
-import { getOffers } from './data.js';
+import { getOffers } from './api.js';
 import { createPopup } from './popup.js';
+import { showAlert } from './utils.js';
 
 const TOKYO_CENTER_COORDS = {
   lat: 35.67917,
   lng: 139.75421,
 };
+
+const VISIBLE_POINTS_NUM = 10;
 
 const map = L.map('map-canvas')
   .on('load', () => {
@@ -69,8 +72,19 @@ const createMarker = (point) => {
     );
 };
 
-const points = getOffers();
+getOffers(
+  (points) => {
+    points.slice(0, VISIBLE_POINTS_NUM).forEach((point) => {
+      createMarker(point);
+    });
+  },
+  (errorMessage) => {
+    showAlert(errorMessage);
+  });
 
-points.forEach((point) => {
-  createMarker(point);
-});
+function resetMap () {
+  setAddress(TOKYO_CENTER_COORDS);
+  mainPinMarker.setLatLng(TOKYO_CENTER_COORDS);
+}
+
+export { resetMap };
