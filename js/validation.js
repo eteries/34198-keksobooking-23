@@ -1,3 +1,5 @@
+import { isPalace } from './utils.js';
+
 const adForm = document.querySelector('.ad-form');
 
 const titleInput = adForm.querySelector('#title');
@@ -35,29 +37,33 @@ priceInput.addEventListener('input', () => {
 const roomNumberSelect = adForm.querySelector('#room_number');
 const capacitySelect = adForm.querySelector('#capacity');
 
-function checkCapacity () {
-  const roomNumber = Number(roomNumberSelect.value);
-  const capacity = Number(capacitySelect.value);
+function validatePalace (capacity) {
+  const message = capacity === 0
+    ? ''
+    : 'Выбранный тип жилья - не для гостей';
+  capacitySelect.setCustomValidity(message);
+}
 
-  if (roomNumber < capacity) {
-    capacitySelect.setCustomValidity(`Максимальное число гостей для выбранного жилья - ${roomNumber}`);
-  } else if (roomNumber === 100 && capacity !== 0) {
-    capacitySelect.setCustomValidity('Выбранный тип жилья - не для гостей');
-  } else if (roomNumber > 0 && capacity === 0) {
+function validateGuests (roomNumber, capacity) {
+  if (capacity === 0) {
     capacitySelect.setCustomValidity('Выберите число гостей');
+  } else if (roomNumber < capacity) {
+    capacitySelect.setCustomValidity(`Максимальное число гостей для выбранного жилья - ${roomNumber}`);
   } else {
     capacitySelect.setCustomValidity('');
   }
+}
 
+function validateCapacity () {
+  const roomNumber = Number(roomNumberSelect.value);
+  const capacity = Number(capacitySelect.value);
+
+  isPalace(roomNumber)
+    ? validatePalace(capacity)
+    : validateGuests(roomNumber, capacity);
   capacitySelect.reportValidity();
 }
 
-roomNumberSelect.addEventListener('change', () => {
-  checkCapacity();
-});
-
-capacitySelect.addEventListener('change', () => {
-  checkCapacity();
-});
-
-checkCapacity();
+roomNumberSelect.addEventListener('change', validateCapacity);
+capacitySelect.addEventListener('change', validateCapacity);
+validateCapacity();
