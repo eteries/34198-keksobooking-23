@@ -1,12 +1,11 @@
 import { syncFormFields } from './utils/utils.js';
 import { showSuccessMessage, showErrorMessage } from './message.js';
 import { sendAd } from './api.js';
+import { resetFilterForm } from './filters.js';
 import { resetMap } from './map.js';
 
 const adForm = document.querySelector('.ad-form');
 const fieldsets = adForm.querySelectorAll('fieldset');
-const filterForm = document.querySelector('.map__filters');
-const filters = filterForm.querySelectorAll('.map__filter, .map__features');
 const checkInSelect = adForm.querySelector('#timein');
 const checkOutSelect = adForm.querySelector('#timeout');
 const typeSelect = adForm.querySelector('#type');
@@ -19,13 +18,7 @@ function toggleAdForm () {
   fieldsets.forEach((node) => node.disabled = !node.disabled);
 }
 
-function toggleFilterForm () {
-  filterForm.classList.toggle('map__filters--disabled');
-  filters.forEach((node) => node.disabled = !node.disabled);
-}
-
 toggleAdForm();
-toggleFilterForm();
 
 checkInSelect.addEventListener('change', () => {
   syncFormFields(checkInSelect, ['12:00', '13:00', '14:00'], ['12:00', '13:00', '14:00'], (newValue) => {
@@ -52,8 +45,8 @@ function setAddress ({lat, lng}) {
 }
 
 function resetAd () {
-  filterForm.reset();
   adForm.reset();
+  resetFilterForm();
   resetMap();
 }
 
@@ -74,4 +67,4 @@ resetButton.addEventListener('click', (evt) => {
   resetAd();
 });
 
-export { toggleAdForm, toggleFilterForm, setAddress };
+export { toggleAdForm, setAddress };

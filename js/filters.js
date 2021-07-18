@@ -1,7 +1,7 @@
 import { placeMarkers } from './map.js';
 import { debounce } from './utils/debounce.js';
 
-const PRICES = {
+const Prices = {
   LOW: 10000,
   HIGH: 50000,
 };
@@ -9,6 +9,7 @@ const PRICES = {
 const RERENDER_TIME = 500;
 
 const filterForm = document.querySelector('.map__filters');
+const filters = filterForm.querySelectorAll('.map__filter, .map__features');
 const housingType = filterForm.querySelector('#housing-type');
 const housingPrice = filterForm.querySelector('#housing-price');
 const housingRooms = filterForm.querySelector('#housing-rooms');
@@ -23,6 +24,16 @@ const currentFilter = {
   features: [],
 };
 
+function toggleFilterForm () {
+  filterForm.classList.toggle('map__filters--disabled');
+  filters.forEach((node) => node.disabled = !node.disabled);
+}
+toggleFilterForm();
+
+function resetFilterForm () {
+  filterForm.reset();
+}
+
 function checkType (point) {
   return currentFilter.type === point.offer.type || currentFilter.type === 'any';
 }
@@ -30,9 +41,9 @@ function checkType (point) {
 function checkPrice (point) {
   return (
     currentFilter.price === 'any'
-    || (point.offer.price < PRICES.LOW && currentFilter.price === 'low')
-    || (point.offer.price > PRICES.HIGH && currentFilter.price === 'high')
-    || (point.offer.price >= PRICES.LOW && point.offer.price <= PRICES.HIGH && currentFilter.price === 'middle')
+    || (point.offer.price < Prices.LOW && currentFilter.price === 'low')
+    || (point.offer.price > Prices.HIGH && currentFilter.price === 'high')
+    || (point.offer.price >= Prices.LOW && point.offer.price <= Prices.HIGH && currentFilter.price === 'middle')
   );
 }
 
@@ -90,3 +101,5 @@ housingPrice.addEventListener('change', (evt) => onSelectChange(evt, 'price'));
 housingRooms.addEventListener('change', (evt) => onSelectChange(evt, 'rooms'));
 housingGuests.addEventListener('change', (evt) => onSelectChange(evt, 'guests'));
 housingFeatures.forEach((input) => input.addEventListener('change', onFeaturesChange));
+
+export { toggleFilterForm, resetFilterForm };

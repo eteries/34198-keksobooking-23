@@ -1,2 +1,2 @@
 import './map.js';
-import './filters.js';
+import './validation.js';

@@ -16,6 +16,7 @@ function showMessage (template, selector) {
 
   function onMessageEscKeydown (evt) {
     if (isEscEvent(evt)) {
+      evt.preventDefault();
       removeMessage(newMessage, onMessageEscKeydown);
     }
   }
