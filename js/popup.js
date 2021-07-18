@@ -1,4 +1,4 @@
-import { getOffers } from './data.js';
+import { getOffers } from './api.js';
 import { declineNoun } from './utils/utils.js';
 
 const OFFER_TYPES_TOKENS = {

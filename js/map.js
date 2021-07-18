@@ -1,4 +1,5 @@
-import { toggleAdForm, toggleFilterForm, setAddress } from './form.js';
+import { toggleAdForm, setAddress } from './form.js';
+import { toggleFilterForm } from './filters.js';
 import { getOffers } from './api.js';
 import { createPopup } from './popup.js';
 import { showAlert } from './utils/utils.js';
@@ -107,6 +108,7 @@ getOffers(
 function resetMap () {
   setAddress(TOKYO_CENTER_COORDS);
   mainPinMarker.setLatLng(TOKYO_CENTER_COORDS);
+  placeMarkers();
 }
 
 export { placeMarkers, resetMap };
