@@ -78,7 +78,6 @@ const createMarker = (point) => {
 };
 
 function placeMarkers (cb) {
-  console.log('ztart placing');
   markerGroup.clearLayers();
   const newPoints = (typeof cb === 'function')
     ? points.filter(cb)
