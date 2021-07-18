@@ -4,7 +4,7 @@ import {
   getRandomArrayElement,
   getUniqueRandomInt,
   getRandomSubArray
-} from './utils.js';
+} from './utils/utils.js';
 
 const MOCK_OFFERS_NUM = 10;
 

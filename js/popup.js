@@ -1,5 +1,5 @@
 import { getOffers } from './data.js';
-import { declineNoun } from './utils.js';
+import { declineNoun } from './utils/utils.js';
 
 const OFFER_TYPES_TOKENS = {
   flat: 'квартира',
@@ -30,7 +30,7 @@ function createPopup ({offer, author: {avatar}}) {
   placeText(offer.address, '.popup__text--address', newPopup);
   placeText(`${offer.price} ₽/ночь`, '.popup__text--price', newPopup);
   placeText(OFFER_TYPES_TOKENS[offer.type], '.popup__type', newPopup);
-  placeText(`${offer.rooms} ${declineNoun(offer.rooms, 'комната', 'комнаты', 'комнат')} для ${offer.guests} ${declineNoun(offer.rooms, 'гостя', 'гостей', 'гостей')}`, '.popup__text--capacity', newPopup);
+  placeText(`${offer.rooms} ${declineNoun(offer.rooms, 'комната', 'комнаты', 'комнат')} для ${offer.guests} ${declineNoun(offer.guests, 'гостя', 'гостей', 'гостей')}`, '.popup__text--capacity', newPopup);
   placeText(`Заезд после ${offer.checkin}, выезд до ${offer.checkout}`, '.popup__text--time', newPopup);
   placeText(offer.description, '.popup__description', newPopup);
 

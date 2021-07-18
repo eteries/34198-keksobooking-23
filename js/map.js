@@ -1,7 +1,7 @@
-import { toggleForm, setAddress } from './form.js';
+import { toggleAdForm, toggleFilterForm, setAddress } from './form.js';
 import { getOffers } from './api.js';
 import { createPopup } from './popup.js';
-import { showAlert } from './utils.js';
+import { showAlert } from './utils/utils.js';
 
 const TOKYO_CENTER_COORDS = {
   lat: 35.67917,
@@ -9,13 +9,16 @@ const TOKYO_CENTER_COORDS = {
 };
 
 const VISIBLE_POINTS_NUM = 10;
+const MAP_SCALE_LEVEL = 12;
+
+let points = [];
 
 const map = L.map('map-canvas')
   .on('load', () => {
-    toggleForm();
     setAddress(TOKYO_CENTER_COORDS);
+    toggleAdForm();
   })
-  .setView(TOKYO_CENTER_COORDS, 13);
+  .setView(TOKYO_CENTER_COORDS, MAP_SCALE_LEVEL);
 
 L.tileLayer(
   'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
@@ -43,6 +46,8 @@ mainPinMarker.on('moveend', (evt) => {
   setAddress(evt.target.getLatLng());
 });
 
+const markerGroup = L.layerGroup().addTo(map);
+
 const createMarker = (point) => {
   const {location: {lat, lng}} = point;
 
@@ -63,7 +68,7 @@ const createMarker = (point) => {
   );
 
   marker
-    .addTo(map)
+    .addTo(markerGroup)
     .bindPopup(
       createPopup(point),
       {
@@ -72,11 +77,29 @@ const createMarker = (point) => {
     );
 };
 
-getOffers(
-  (points) => {
-    points.slice(0, VISIBLE_POINTS_NUM).forEach((point) => {
+function placeMarkers (cb) {
+  console.log('ztart placing');
+  markerGroup.clearLayers();
+  const newPoints = (typeof cb === 'function')
+    ? points.filter(cb)
+    : [...points];
+
+  if (!newPoints.length) {
+    showAlert('Нет соответствующих предложений');
+  }
+
+  newPoints
+    .slice(0, VISIBLE_POINTS_NUM)
+    .forEach((point) => {
       createMarker(point);
     });
+}
+
+getOffers(
+  (newPoints) => {
+    points = newPoints;
+    placeMarkers();
+    toggleFilterForm();
   },
   (errorMessage) => {
     showAlert(errorMessage);
@@ -87,4 +110,4 @@ function resetMap () {
   mainPinMarker.setLatLng(TOKYO_CENTER_COORDS);
 }
 
-export { resetMap };
+export { placeMarkers, resetMap };
