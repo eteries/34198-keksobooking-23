@@ -77,7 +77,7 @@ function syncFormFields (node, arrayFrom, arrayTo, setField) {
 
 function showAlert (message, bgColor = 'red') {
   const alertContainer = document.createElement('div');
-  alertContainer.style.zIndex = 100;
+  alertContainer.style.zIndex = 500;
   alertContainer.style.position = 'fixed';
   alertContainer.style.width = '300px';
   alertContainer.style.top = '20px';
@@ -97,10 +97,6 @@ function showAlert (message, bgColor = 'red') {
   }, ALERT_SHOW_TIME);
 }
 
-function isPalace (roomNumber) {
-  return roomNumber === 100;
-}
-
 function isEscEvent (evt) {
   return evt.key === 'Escape' || evt.key === 'Esc';
 }
@@ -114,6 +110,5 @@ export {
   declineNoun,
   syncFormFields,
   showAlert,
-  isPalace,
   isEscEvent
 };

@@ -1,5 +1,3 @@
-import { isPalace } from './utils.js';
-
 const adForm = document.querySelector('.ad-form');
 
 const titleInput = adForm.querySelector('#title');
@@ -36,6 +34,10 @@ priceInput.addEventListener('input', () => {
 
 const roomNumberSelect = adForm.querySelector('#room_number');
 const capacitySelect = adForm.querySelector('#capacity');
+
+function isPalace (roomNumber) {
+  return roomNumber === 100;
+}
 
 function validatePalace (capacity) {
   const message = capacity === 0

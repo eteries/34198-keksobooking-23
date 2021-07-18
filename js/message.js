@@ -1,4 +1,4 @@
-import {isEscEvent} from './utils.js';
+import {isEscEvent} from './utils/utils.js';
 
 const successTemplate = document.querySelector('#success');
 const errorTemplate = document.querySelector('#error');

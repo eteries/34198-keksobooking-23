@@ -1,4 +1,4 @@
-import { syncFormFields } from './utils.js';
+import { syncFormFields } from './utils/utils.js';
 import { showSuccessMessage, showErrorMessage } from './message.js';
 import { sendAd } from './api.js';
 import { resetMap } from './map.js';
@@ -14,15 +14,18 @@ const priceInput = adForm.querySelector('#price');
 const addressInput = adForm.querySelector('#address');
 const resetButton = adForm.querySelector('.ad-form__reset');
 
-function toggleForm () {
+function toggleAdForm () {
   adForm.classList.toggle('ad-form--disabled');
   fieldsets.forEach((node) => node.disabled = !node.disabled);
+}
 
+function toggleFilterForm () {
   filterForm.classList.toggle('map__filters--disabled');
   filters.forEach((node) => node.disabled = !node.disabled);
 }
 
-toggleForm();
+toggleAdForm();
+toggleFilterForm();
 
 checkInSelect.addEventListener('change', () => {
   syncFormFields(checkInSelect, ['12:00', '13:00', '14:00'], ['12:00', '13:00', '14:00'], (newValue) => {
@@ -71,4 +74,4 @@ resetButton.addEventListener('click', (evt) => {
   resetAd();
 });
 
-export { toggleForm, setAddress };
+export { toggleAdForm, toggleFilterForm, setAddress };
