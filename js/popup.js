@@ -1,4 +1,3 @@
-import { getOffers } from './api.js';
 import { declineNoun } from './utils/utils.js';
 
 const OFFER_TYPES_TOKENS = {
@@ -64,7 +63,5 @@ function createPopup ({offer, author: {avatar}}) {
 
   return newPopup;
 }
-
-getOffers();
 
 export { createPopup };

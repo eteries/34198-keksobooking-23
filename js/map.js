@@ -12,8 +12,6 @@ const TOKYO_CENTER_COORDS = {
 const VISIBLE_POINTS_NUM = 10;
 const MAP_SCALE_LEVEL = 12;
 
-let points = [];
-
 const map = L.map('map-canvas')
   .on('load', () => {
     setAddress(TOKYO_CENTER_COORDS);
@@ -77,6 +75,8 @@ const createMarker = (point) => {
       },
     );
 };
+
+let points = [];
 
 function placeMarkers (cb) {
   markerGroup.clearLayers();
