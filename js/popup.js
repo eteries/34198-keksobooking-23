@@ -12,7 +12,7 @@ const DEFAULT_AVATAR_PATH = 'img/avatars/default.png';
 
 const cardTemplate = document.querySelector('#card');
 
-function placeText (text, selector, parentNode = document) {
+function putText (text, selector, parentNode = document) {
   const element = parentNode.querySelector(selector);
   text
     ? element.textContent = text
@@ -25,13 +25,13 @@ function createPopup ({offer, author: {avatar}}) {
     .cloneNode(true)
     .querySelector('.popup');
 
-  placeText(offer.title, '.popup__title', newPopup);
-  placeText(offer.address, '.popup__text--address', newPopup);
-  placeText(`${offer.price} ₽/ночь`, '.popup__text--price', newPopup);
-  placeText(OfferTypeTokens[offer.type.toUpperCase()], '.popup__type', newPopup);
-  placeText(`${offer.rooms} ${declineNoun(offer.rooms, 'комната', 'комнаты', 'комнат')} для ${offer.guests} ${declineNoun(offer.guests, 'гостя', 'гостей', 'гостей')}`, '.popup__text--capacity', newPopup);
-  placeText(`Заезд после ${offer.checkin}, выезд до ${offer.checkout}`, '.popup__text--time', newPopup);
-  placeText(offer.description, '.popup__description', newPopup);
+  putText(offer.title, '.popup__title', newPopup);
+  putText(offer.address, '.popup__text--address', newPopup);
+  putText(`${offer.price} ₽/ночь`, '.popup__text--price', newPopup);
+  putText(OfferTypeTokens[offer.type.toUpperCase()], '.popup__type', newPopup);
+  putText(`${offer.rooms} ${declineNoun(offer.rooms, 'комната', 'комнаты', 'комнат')} для ${offer.guests} ${declineNoun(offer.guests, 'гостя', 'гостей', 'гостей')}`, '.popup__text--capacity', newPopup);
+  putText(`Заезд после ${offer.checkin}, выезд до ${offer.checkout}`, '.popup__text--time', newPopup);
+  putText(offer.description, '.popup__description', newPopup);
 
   const features = newPopup.querySelector('.popup__features');
   if (offer.features) {

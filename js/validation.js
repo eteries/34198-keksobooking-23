@@ -1,7 +1,15 @@
 const adForm = document.querySelector('.ad-form');
 
 const titleInput = adForm.querySelector('#title');
-titleInput.addEventListener('input', () => {
+const priceInput = adForm.querySelector('#price');
+const roomNumberSelect = adForm.querySelector('#room_number');
+const capacitySelect = adForm.querySelector('#capacity');
+
+function isPalace (roomNumber) {
+  return roomNumber === 100;
+}
+
+function validateTitle () {
   if (titleInput.validity.valueMissing) {
     titleInput.setCustomValidity('Поле обязательно для заполнения');
   } else if (titleInput.validity.tooShort) {
@@ -13,10 +21,9 @@ titleInput.addEventListener('input', () => {
   }
 
   titleInput.reportValidity();
-});
+}
 
-const priceInput = adForm.querySelector('#price');
-priceInput.addEventListener('input', () => {
+function validatePrice () {
   if (priceInput.validity.valueMissing) {
     priceInput.setCustomValidity('Поле обязательно для заполнения');
   } else if (priceInput.validity.badInput) {
@@ -30,13 +37,6 @@ priceInput.addEventListener('input', () => {
   }
 
   priceInput.reportValidity();
-});
-
-const roomNumberSelect = adForm.querySelector('#room_number');
-const capacitySelect = adForm.querySelector('#capacity');
-
-function isPalace (roomNumber) {
-  return roomNumber === 100;
 }
 
 function validatePalace (capacity) {
@@ -66,6 +66,13 @@ function validateCapacity () {
   capacitySelect.reportValidity();
 }
 
-roomNumberSelect.addEventListener('change', validateCapacity);
-capacitySelect.addEventListener('change', validateCapacity);
-validateCapacity();
+function isCapacityValid () {
+  validateCapacity();
+  return capacitySelect.checkValidity();
+}
+
+function isAdFormValid () {
+  return adForm.checkValidity && isCapacityValid();
+}
+
+export { isAdFormValid, validatePrice, validateTitle, validateCapacity };
