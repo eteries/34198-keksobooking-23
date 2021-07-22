@@ -1,4 +1,4 @@
-import { placeMarkers } from './map.js';
+import { putMarkers } from './map.js';
 import { debounce } from './utils/debounce.js';
 
 const Prices = {
@@ -73,7 +73,7 @@ const checks = [
 
 function applyFilters () {
   debounce(() => {
-    placeMarkers((point) => checks.every((check) => check(point)));
+    putMarkers((point) => checks.every((check) => check(point)));
   }, RERENDER_TIME)();
 }
 

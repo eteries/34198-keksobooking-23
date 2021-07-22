@@ -78,7 +78,7 @@ const createMarker = (point) => {
 
 let points = [];
 
-function placeMarkers (cb) {
+function putMarkers (cb) {
   markerGroup.clearLayers();
   const newPoints = (typeof cb === 'function')
     ? points.filter(cb)
@@ -98,7 +98,7 @@ function placeMarkers (cb) {
 getOffers(
   (newPoints) => {
     points = newPoints;
-    placeMarkers();
+    putMarkers();
     toggleFilterForm();
   },
   (errorMessage) => {
@@ -108,7 +108,7 @@ getOffers(
 function resetMap () {
   setAddress(TOKYO_CENTER_COORDS);
   mainPinMarker.setLatLng(TOKYO_CENTER_COORDS);
-  placeMarkers();
+  putMarkers();
 }
 
-export { placeMarkers, resetMap };
+export { putMarkers, resetMap };
