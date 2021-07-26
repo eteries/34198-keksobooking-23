@@ -4,6 +4,19 @@ import { sendAd } from './api.js';
 import { resetFilterForm } from './filters.js';
 import { resetMap } from './map.js';
 import { validatePrice, validateTitle, validateCapacity, isAdFormValid } from './validation.js';
+import { showPreview } from './image.js';
+
+const AvatarOptions = {
+  WIDTH: 40,
+  HEIGHT: 40,
+  ALT: 'Ваше фото или аватар',
+};
+
+const PhotoOptions = {
+  WIDTH: 70,
+  HEIGHT: 70,
+  ALT: 'Фотография жилья',
+};
 
 const adForm = document.querySelector('.ad-form');
 const resetButton = adForm.querySelector('.ad-form__reset');
@@ -17,6 +30,11 @@ const titleInput = adForm.querySelector('#title');
 const typeInput = adForm.querySelector('#type');
 const roomNumberSelect = adForm.querySelector('#room_number');
 const capacitySelect = adForm.querySelector('#capacity');
+
+const avatarSelector = adForm.querySelector('.ad-form-header__input');
+const avatarPreview = adForm.querySelector('.ad-form-header__preview');
+const photoSelector = adForm.querySelector('.ad-form__upload input[type=file]');
+const photoPreview = adForm.querySelector('.ad-form__photo');
 
 function toggleAdForm () {
   adForm.classList.toggle('ad-form--disabled');
@@ -75,6 +93,14 @@ function onCapacityChange () {
   validateCapacity();
 }
 
+function onAvatarChange () {
+  showPreview(avatarSelector, avatarPreview, AvatarOptions);
+}
+
+function onPhotoChange () {
+  showPreview(photoSelector, photoPreview, PhotoOptions);
+}
+
 function onResetButtonClick (evt) {
   evt.preventDefault();
   resetAd();
@@ -103,6 +129,8 @@ checkInSelect.addEventListener('change', onCheckInChange);
 checkOutSelect.addEventListener('change', onCheckOutChange);
 roomNumberSelect.addEventListener('change', onRoomNumberChange);
 capacitySelect.addEventListener('change', onCapacityChange);
+avatarSelector.addEventListener('change', onAvatarChange);
+photoSelector.addEventListener('change', onPhotoChange);
 resetButton.addEventListener('click', onResetButtonClick);
 adForm.addEventListener('submit', onAdFormSubmit);
 
