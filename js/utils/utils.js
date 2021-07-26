@@ -50,9 +50,16 @@ function isEscEvent (evt) {
   return evt.key === 'Escape' || evt.key === 'Esc';
 }
 
+function removeChildren (node) {
+  while (node.firstChild) {
+    node.firstChild.remove();
+  }
+}
+
 export {
   declineNoun,
   syncFormFields,
   showAlert,
-  isEscEvent
+  isEscEvent,
+  removeChildren
 };
