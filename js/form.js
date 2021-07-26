@@ -4,7 +4,7 @@ import { sendAd } from './api.js';
 import { resetFilterForm } from './filters.js';
 import { resetMap } from './map.js';
 import { validatePrice, validateTitle, validateCapacity, isAdFormValid } from './validation.js';
-import { showPreview } from './image.js';
+import { showPreview } from './preview.js';
 
 const AvatarOptions = {
   WIDTH: 40,
